@@ -43,3 +43,4 @@ Open `index.html` directly in a browser, or in VS Code install the **Live Server
 ## Deploy
 Drag this folder into **Netlify** or **Vercel**, or push it to a GitHub repo and enable **GitHub Pages** — all free for a static site like this.
 # My-portfolio
+# Portfolio
