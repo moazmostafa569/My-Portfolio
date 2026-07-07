@@ -155,3 +155,29 @@ document.querySelectorAll('.copyable').forEach(row => {
     setTimeout(() => { if (copyHint) copyHint.textContent = 'click a row to copy'; }, 2000);
   });
 });
+
+/* ---------------------------------------------
+   6. Populate "last shipped" in the ticker
+   - Tries the GitHub commits API for this repo's latest commit date
+   - Falls back to the current local date if the network/API isn't available
+--------------------------------------------- */
+const lastShippedEl = document.getElementById('lastShipped');
+if (lastShippedEl){
+  // helper to format date nicely
+  const fmt = (d) => new Date(d).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+
+  // Attempt GitHub API first (public repo). If it fails, use today's date.
+  fetch('https://api.github.com/repos/moazmostafa569/My-Portfolio/commits?per_page=1')
+    .then(res => {
+      if (!res.ok) throw new Error('no-github');
+      return res.json();
+    })
+    .then(data => {
+      const date = data && data[0] && data[0].commit && data[0].commit.committer && data[0].commit.committer.date;
+      if (date) lastShippedEl.textContent = fmt(date);
+      else lastShippedEl.textContent = fmt(new Date());
+    })
+    .catch(() => {
+      lastShippedEl.textContent = fmt(new Date());
+    });
+}
