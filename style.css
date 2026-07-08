@@ -796,9 +796,9 @@ footer {
 }
 .about-grid {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: minmax(260px, 320px) 1fr;
   gap: 48px;
-  align-items: start;
+  align-items: center;
 }
 
 @media (max-width: 720px) {
@@ -807,43 +807,50 @@ footer {
   }
 }
 
-.photo-frame {
-  background: linear-gradient(180deg, rgba(17, 21, 29, 0.98), rgba(13, 16, 23, 0.98));
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.55);
+.about-photo-card {
+  position: relative;
+  padding: 0;
+  border: none;
+  border-radius: 24px;
+  background: transparent;
+  box-shadow: none;
 }
 
-.photo-frame .editor-bar {
-  padding: 8px 12px;
-  background: var(--panel-alt);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-soft);
+.photo-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #121723, #0b0f16);
+  box-shadow: 0 20px 45px -24px rgba(0, 0, 0, 0.9);
 }
 
-.photo-frame img,
-.photo-frame .placeholder {
+.photo-shell img {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 6px;
   display: block;
-  margin-top: 8px;
-  border: 1px solid var(--border);
+  transition: transform 0.25s ease, filter 0.25s ease;
+  filter: saturate(1.04) contrast(1.02);
 }
 
-.photo-frame .placeholder {
-  background: linear-gradient(135deg, #1E2330, #141821);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-mute);
+.about-photo-card:hover .photo-shell img {
+  transform: scale(1.03);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.photo-badge {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(10, 13, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  font-size: 11px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  text-align: center;
-  padding: 16px;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
 }
 
 .about-text p {
